@@ -1,10 +1,9 @@
 import Button from "../../components/button/button";
 import "./connectPage.css";
-import React, { useState, useEffect } from "react";
-import { ethers } from "ethers";
+import React, { useEffect } from "react";
 
 function ConnectPage({getConnectedWallet}) {
-  const [currentAccount, setCurrentAccount] = useState();
+  // const [currentAccount, setCurrentAccount] = useState();
 
   const checkIfWalletIsConnected = async () => {
     console.log("started");
@@ -21,9 +20,9 @@ function ConnectPage({getConnectedWallet}) {
       const accounts = await ethereum.request({ method: "eth_accounts" });
 
       if (accounts.length !== 0) {
-        const account = accounts[0];
+        // const account = accounts[0];
         // console.log("Found an authorized account at: ", account);
-        setCurrentAccount(account);
+        // setCurrentAccount(account);
         getConnectedWallet(true)
       } else {
         console.log("No authorized account found");
@@ -47,7 +46,7 @@ function ConnectPage({getConnectedWallet}) {
       });
 
       console.log("Connected account ", accounts[0]);
-      setCurrentAccount(accounts[0]);
+      // setCurrentAccount(accounts[0]);
       getConnectedWallet(true)
     } catch (error) {
       console.log(error);
@@ -57,7 +56,7 @@ function ConnectPage({getConnectedWallet}) {
 
   useEffect(() => {
     checkIfWalletIsConnected();
-  }, []);
+  }, [])// eslint-disable-line react-hooks/exhaustive-deps
   return (
     <div className="connectMainContainer">
       <div className="connectLeft"></div>

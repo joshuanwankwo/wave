@@ -8,7 +8,7 @@ import Cookies from "../../components/cookies/cookies";
 import Modal from "../../components/modal/modal";
 
 function HomePage() {
-  const [currentAccount, setCurrentAccount] = useState();
+  // const [currentAccount, setCurrentAccount] = useState();
   const [allWaves, setAllWaves] = useState([]);
   const [message, setMessage] = useState("");
   const contractAddress = "0x5a056c90F1Fd8546B1E4D91d6Fb1b92abD7A1a19";
@@ -21,9 +21,9 @@ function HomePage() {
     state: false,
   });
 
-  const testArray = [
-    1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
-  ];
+  // const testArray = [
+  //   1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
+  // ];
 
   const checkIfWalletIsConnected = async () => {
     console.log("started");
@@ -40,9 +40,9 @@ function HomePage() {
       const accounts = await ethereum.request({ method: "eth_accounts" });
 
       if (accounts.length !== 0) {
-        const account = accounts[0];
+        // const account = accounts[0];
         // console.log("Found an authorized account at: ", account);
-        setCurrentAccount(account);
+        // setCurrentAccount(account);
         getAllWaves();
       } else {
         console.log("No authorized account found");
@@ -183,7 +183,8 @@ function HomePage() {
   useEffect(() => {
     checkIfWalletIsConnected();
     renderTotalWaves();
-  }, []);
+  }, []) // eslint-disable-line react-hooks/exhaustive-deps
+
 
   return (
     <div className="mainContainer">
@@ -213,7 +214,7 @@ function HomePage() {
                   }}
                 />
                 <button className="sendButton" onClick={wave}>
-                  👋
+                  <span role="img" aria-label="wave-emoji">👋</span>
                 </button>
               </form>
             </div>
@@ -230,20 +231,22 @@ function HomePage() {
                   }}
                 >
                   {expand.state ? "〈〈 " : null}
-                  {testArray.length}
+                  {allWaves.length}
                 </h1>
                 <span>Inbox</span>
               </div>
               <div className="messagesContainer">
                 {expand.state ? (
-                  <div className="expandedMessageCon">
+                 <div className="expandedMessageWrapper">
+                    <div className="expandedMessageCon">
                     <h1 className="expandedMessageDp">J</h1>
                     <h3 className="expandedMessageAddress">{expand.address}</h3>
                     <h3 className="expandedMessageText">"{expand.message}"</h3>
                     <h3 className="expandedMessageTime">{expand.time} </h3>
                   </div>
+                 </div>
                 ) : (
-                  testArray.map((test, key) => {
+                  allWaves.map((test, key) => {
                     return (
                       <div
                         className="transaction"

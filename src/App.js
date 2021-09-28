@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from "react";
 import ConnectPage from "./pages/connectPage/connectPage";
-import HomePage from "./pages/homePage/homPage";
+import HomePage from "./pages/homePage/homePage";
 
 function App() {
   const [connectedWallet, setConnectedWallet] = useState(true)
@@ -12,8 +12,10 @@ function App() {
   }
 
   useEffect(() => {
-      getConnectedWallet()
+     getConnectedWallet()
   }, [])
+
+  
   return (
     <div>
      {connectedWallet ? <HomePage /> : <ConnectPage getConnectedWallet={getConnectedWallet}/>}

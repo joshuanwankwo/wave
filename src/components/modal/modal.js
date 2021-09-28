@@ -19,7 +19,7 @@ function Modal({ modalDisplay, setModalDisplay }) {
         </div>
       </div>
       <div className="modalRight">
-        <h1>💡</h1>
+        <h1><span role="img" aria-label="idea-emoji">💡</span></h1>
         <p>
           Hi! my name is Joshua Nwankwo, I build pixel perfect user interfaces
           using JavaScript technologis like ReactJS, React Native and ElectronJS. I recently started coding smart contracts using solidity and this is one of my pet projects on etheruem blockchain development.

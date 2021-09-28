@@ -1,0 +1,28 @@
+.connectMainContainer{
+    /* border: 1px solid green; */
+    height: 100vh;
+    width: 100vw;
+    /* background-color: rgba(26, 146, 66, 0.486); */
+    display: flex;
+}
+
+.connectMainContainer > div {
+    width: 50%;
+    height: 100%;
+    /* border: 1px solid green; */
+}
+
+.connectLeft{
+    background: url("../../assets/josh.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.connectRight{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    /* color: #e930492d; */
+}

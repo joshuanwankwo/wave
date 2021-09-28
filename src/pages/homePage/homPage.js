@@ -13,8 +13,13 @@ function HomePage() {
   const [message, setMessage] = useState("");
   const contractAddress = "0x5a056c90F1Fd8546B1E4D91d6Fb1b92abD7A1a19";
   const contractABI = waveportal.abi;
-  const [modalDisplay, setModalDisplay] = useState("none")
-
+  const [modalDisplay, setModalDisplay] = useState("none");
+  const [expand, setExpand] = useState({
+    address: "0x5a056c90F1Fd8546B1E4D91d6Fb1b92abD7A1a19",
+    message: "This is a test message",
+    time: "12:00 AM",
+    state: false,
+  });
 
   const testArray = [
     1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
@@ -70,7 +75,7 @@ function HomePage() {
 
   const wave = async (e) => {
     e.preventDefault();
-    setMessage("")
+    setMessage("");
     try {
       const { ethereum } = window;
 
@@ -97,7 +102,6 @@ function HomePage() {
 
         count = await wavePortalContract.getTotalWaves();
         console.log("Total waves are ", count.toNumber(), " in number");
-    
       } else {
         console.log("Ethereum object doesn't exist");
       }
@@ -176,7 +180,6 @@ function HomePage() {
     }
   };
 
-
   useEffect(() => {
     checkIfWalletIsConnected();
     renderTotalWaves();
@@ -184,97 +187,97 @@ function HomePage() {
 
   return (
     <div className="mainContainer">
-      <Modal modalDisplay={modalDisplay} setModalDisplay={setModalDisplay}/>
+      <Modal modalDisplay={modalDisplay} setModalDisplay={setModalDisplay} />
       <div className="homePageContainer">
         <div className="homePageInnerCon">
-          <NavBabr setModalDisplay={setModalDisplay}/>
+          <NavBabr setModalDisplay={setModalDisplay} />
           <div className="centerCon">
             <div className="centerConLeft">
+              <div className="greeting">
               <h1 className="walletAddress">Hi, 0x4610...Cb4F</h1>
               <div className="description">
                 How about you wave and get a cake? <br />
-                Wave to a community of blockchain developers and enthusaists and you might get lucky and get some free eth sent to your wallet and that's it, no bank charges, no long bank que, no paper works,  no government! <br />
+                Wave to a community of blockchain developers and enthusaists and
+                you might get lucky and get some free eth sent to your wallet
+                and that's it, no bank charges, no long bank que, no paper
+                works, no government! <br />
+              </div>
               </div>
               <form className="form" onSubmit={wave}>
-                <input type="text" placeholder="Type a message" value={message} onChange={(e) => {
-                  setMessage(e.target.value)
-                }} />
-                <button className="sendButton" onClick={wave}>👋</button>
+                <input
+                  type="text"
+                  placeholder="Type a message"
+                  value={message}
+                  onChange={(e) => {
+                    setMessage(e.target.value);
+                  }}
+                />
+                <button className="sendButton" onClick={wave}>
+                  👋
+                </button>
               </form>
             </div>
             <div className="centerConRight">
               <div className="messagesHeader">
-                <h1 className="total">{testArray.length}</h1>
+                <h1
+                  className="total"
+                  onClick={() => {
+                    if (expand.state) {
+                      setExpand({ state: false });
+                    } else {
+                      return;
+                    }
+                  }}
+                >
+                  {expand.state ? "〈〈 " : null}
+                  {testArray.length}
+                </h1>
                 <span>Inbox</span>
               </div>
               <div className="messagesContainer">
-                {testArray.map((test, key)=>{
-                return(
-                  <div className="transaction" key={key}>
-                <div className="dp">J</div>
-                <div className="info">
-                    <div className="messageWrapper">
-                    <h4>Address</h4>
-                    <span className="recievedMessage">Message from the waver, just to clearify things</span>
-                    </div>
-                <span className="expand">〉</span>
-                </div>
-              </div>
-                )
-              })}
+                {expand.state ? (
+                  <div className="expandedMessageCon">
+                    <h1 className="expandedMessageDp">J</h1>
+                    <h3 className="expandedMessageAddress">{expand.address}</h3>
+                    <h3 className="expandedMessageText">"{expand.message}"</h3>
+                    <h3 className="expandedMessageTime">{expand.time} </h3>
+                  </div>
+                ) : (
+                  testArray.map((test, key) => {
+                    return (
+                      <div
+                        className="transaction"
+                        key={key}
+                        onClick={() => {
+                          console.log(expand);
+                          setExpand({
+                            state: true,
+                            message: "Test",
+                            time: "1:00 AM",
+                            address: "0x5a056c90F1Fd8546B1E4D91d6Fb1b92abD7A1a19"
+                          });
+                        }}
+                      >
+                        <div className="dp">{key + 1}</div>
+                        <div className="info">
+                          <div className="messageWrapper">
+                            <h4>Address</h4>
+                            <span className="recievedMessage">
+                              Message from the waver, just to clearify things
+                            </span>
+                          </div>
+                          <span className="expand">〉</span>
+                        </div>
+                      </div>
+                    );
+                  })
+                )}
               </div>
             </div>
           </div>
           <Cookies />
         </div>
       </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
       {/* <div className="dataContainer">
         <div className="header">Hi Satoshi! 👊🏾</div>

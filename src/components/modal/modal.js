@@ -8,15 +8,21 @@ function Modal({ modalDisplay, setModalDisplay }) {
   return (
     <div className="modalCon" style={{ display: modalDisplay }}>
       <div className="modalLeft">
+        <div className="modalLeftInnerCon">
         <span className="backButton" onClick={() => {
           setModalDisplay("none")
         }}>〈</span>
+        <span className="nameWrapper">
+          <h1>Joshua Nwankwo</h1>
+          <h5>@judicodes</h5>
+        </span>
+        </div>
       </div>
       <div className="modalRight">
-        <h1>A bit about this dude</h1>
+        <h1>💡</h1>
         <p>
           Hi! my name is Joshua Nwankwo, I build pixel perfect user interfaces
-          using JavaScript technologis like ReactJS, React Native and ElectronJS. I recently started coding smart contractsusing solidity and this is one of my pet projects on etheruem blockchain development.
+          using JavaScript technologis like ReactJS, React Native and ElectronJS. I recently started coding smart contracts using solidity and this is one of my pet projects on etheruem blockchain development.
           <br />
           <br />
           Wave is my own version of WavePortal, a task from @buildspace for

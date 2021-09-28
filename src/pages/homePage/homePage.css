@@ -49,7 +49,7 @@
   .homePageContainer{
       height: 100vh;
       width: 100vw;
-      border: 1px solid green;
+      /* border: 1px solid green; */
       display: flex;
       align-items: center;
       justify-content: center;
@@ -58,24 +58,37 @@
   .homePageInnerCon{
       width: 90%;
       height: 100%;
-      border: 1px solid green;
+      /* border: 1px solid green; */
       display: flex;
       flex-direction: column;
       justify-content: space-between;
       position: relative;
       /* align-items: center; */
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
+
   }
 
   .centerCon{
-      border: 1px solid green;
+      /* border: 1px solid green; */
       width: 100%;
       height: 90vh;
       display: flex;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
+
+  }
+
+  .greeting{
+    /* border: 1px solid green; */
+    display: flex;
+    flex: 1 auto;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
   }
 
   .description{
       width: 70%;
-      border: 1px solid green;
+      /* border: 1px solid green; */
       border-radius: 10px;
       height: 200px;
       padding: 20px;
@@ -85,20 +98,26 @@
       font-size: 15px;
       line-height: 30px;
       text-align: center;
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+
   }
 
   .centerCon > div{
-      border: 1px solid green;
+      /* border: 1px solid green; */
       height: 100%;
       width: 50%;
   }
 
   .centerConLeft{
       display: flex;
+      flex-flow: column;
       flex-direction: column;
       align-items: center;
       /* justify-content: space-evenly; */
       position: relative;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
+      /* border: 1px solid green; */
+
 
   }
 
@@ -108,16 +127,16 @@
 
   .centerConRight{
       display: flex;
-      flex-direction: column;
-      align-items: center;
+      flex-flow: column;
+      /* align-items: center; */
       /* justify-content: center; */
       /* padding: 20px 0; */
-      overflow-y: scroll;
       height: 100%;
+      /* border: 1px solid green; */
   }
 
   form{
-      border: 1px solid green;
+      /* border: 1px solid green; */
       width: 100%;
       display: flex;
       /* flex-direction: column; */
@@ -125,6 +144,8 @@
       justify-content: space-evenly;
       position: absolute;
       bottom: 0;
+    box-shadow: 0px -4px 4px rgba(0, 0, 0, 0.1);
+
   }
 
   form > input{
@@ -134,6 +155,7 @@
       margin: 20px 0;
       border: 1px solid green;
       /* padding-bottom: 20px; */
+      
   }
 
   form > input:focus{
@@ -150,13 +172,18 @@
   }
 
   .messagesHeader{
-      border: 1px solid green;
+      /* border: 1px solid green; */
       width: 100%;
-      height: 25%;
+      /* height: 70px; */
+      /* flex: 0 1 auto; */
+      padding: 20px 0px;
       display: flex;
       align-items: center;
       justify-content: center;
       position: relative;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
+    background-color: transparent;
+
   }
 
   .messagesHeader > span{
@@ -173,21 +200,25 @@
       border-radius: 10px;
       font-size: 10px;
       font-weight: bold;
+      cursor: pointer;
   }
 
   .messagesContainer{
-      border: 1px solid green;
+      /* border: 1px solid green; */
       width: 100%;
+      /* height: calc(100% - 70px); */
       display: flex;
+      flex: 1 1 auto;
       flex-direction: column;
       align-items: center;
+      justify-content: center;
       padding-top: 20px;
       overflow-y: scroll;
   }
 
   .transaction{
-      border: 1px solid green;
-      height: 60px;
+      /* border: 1px solid green; */
+      /* height: 60px; */
       width: 80%;
       border-radius: 7px;
       display: flex;
@@ -195,10 +226,16 @@
       justify-content: space-evenly;
       margin-bottom: 20px;
       cursor: pointer;
+      padding: 15px 0px;
+    box-shadow: 0px 4px 40px rgba(0, 0, 0, 0.1);
+
   }
 
   .transaction:hover{
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+    width: 85%;
+    height: 80px;
+    border: none;
 
   }
 
@@ -208,22 +245,20 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      margin: 15px 0;
+      /* margin: 15px 0; */
   }
 
   .dp{
       width: 10%;
-      border: 1px solid green;
+      /* border: 1px solid green; */
       height: 35px;
       width: 35px;
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-  }
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
 
-  .messageWrapper{
-      /* border: 1px solid green; */
   }
 
   .expand{
@@ -240,4 +275,47 @@
       margin: 0;
       padding: 0;
       font-size: 13px;
+  }
+
+  .expandedMessageCon{
+      /* border: 1px solid green; */
+      /* height: fill-available; */
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 30px;
+      border-radius: 10px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
+
+  }
+
+  .expandedMessageDp{
+      height: 80px;
+      width: 80px;
+      /* border: 1px solid green; */
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 50px;
+      margin: 0 0 20px 0;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
+
+
+  }
+
+  .expandedMessageAddress{
+      margin: 10px 0px;
+      font-size: 12px;
+  }
+
+  .expandedMessageText{
+      font-size: 30px;
+  }
+
+  .expandedMessageTime{
+      align-self: flex-end;
+      margin: 0px;
+      font-size: 12px;
   }

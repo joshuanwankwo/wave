@@ -15,7 +15,7 @@ function NavBabr({setModalDisplay}) {
             setModalDisplay("flex")
           }}
         >
-          🔔
+          💡
         </span>
         <span
         role="img" aria-label="menu-emoji"

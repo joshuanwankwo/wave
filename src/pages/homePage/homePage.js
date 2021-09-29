@@ -7,12 +7,16 @@ import Cookies from "../../components/cookies/cookies";
 // import Button from "../../components/button/button";
 import Modal from "../../components/modal/modal";
 import spinner from "../../assets/spinner.gif";
+import Button from "../../components/button/button";
 
 function HomePage() {
   const [allWaves, setAllWaves] = useState([]);
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
-  const contractAddress = "0x68Cc2aCad3156d91a29F62C3Ed843a39D190C497";
+  const [chatMode, setChatMode] = useState(false);
+  const [showLeft, setShowLeft] = useState();
+  const [showRight, setShowRight] = useState();
+  const contractAddress = "0x73fD2a3c5baFfdbE4ADe5e7CCC8D39b265e19158";
   const contractABI = waveportal.abi;
   const [modalDisplay, setModalDisplay] = useState("none");
   const [expand, setExpand] = useState({
@@ -27,12 +31,6 @@ function HomePage() {
     lastFour: "",
     initial: "",
   });
-
-  // const testArray = [
-  //   1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
-  // ];
-
-  
 
   const checkIfWalletIsConnected = async () => {
     console.log("started");
@@ -60,27 +58,6 @@ function HomePage() {
       console.log(error);
     }
   };
-
-  // const connectWallet = async () => {
-  //   try {
-  //     const { ethereum } = window;
-
-  //     if (!ethereum) {
-  //       console.log("Get MetaMask!");
-  //       return;
-  //     }
-
-  //     const accounts = await ethereum.request({
-  //       method: "eth_requestAccounts",
-  //     });
-
-  //     // console.log("Connected account ", accounts[0]);
-  //     setCurrentAccount(accounts[0]);
-  //   } catch (error) {
-  //     console.log(error);
-  //     return;
-  //   }
-  // };
 
   const wave = async (e) => {
     e.preventDefault();
@@ -122,31 +99,8 @@ function HomePage() {
     }
   };
 
-  const renderTotalWaves = async () => {
-    try {
-      const { ethereum } = window;
-
-      if (ethereum) {
-        const provider = new ethers.providers.Web3Provider(ethereum);
-        const signer = provider.getSigner();
-        const wavePortalContract = new ethers.Contract(
-          contractAddress,
-          contractABI,
-          signer
-        );
-
-        // console.log(wavePortalContract);
-        let count = await wavePortalContract.getTotalWaves();
-        console.log("Total waves are ", count.toNumber(), " in number");
-        checkIfWalletIsConnected();
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   const getAllWaves = async () => {
-    console.log("getting all donations");
+    console.log("getting all waves");
 
     try {
       const { ethereum } = window;
@@ -200,13 +154,31 @@ function HomePage() {
     setUsername(newUsername);
   };
 
-  // fetchUserName();
+
+  const responsiveness = () => {
+    if (window.innerWidth < 979 && chatMode) {
+      console.log("ShowChat");
+      setShowLeft(false);
+      setShowRight(true);
+    } else if (window.innerWidth < 979 && !chatMode) {
+      setShowLeft(true);
+      setShowRight(false);
+    }else if(window.innerWidth > 979){
+      setShowLeft(true);
+      setShowRight(true);
+    }
+  }
+
+
+  window.addEventListener("resize", responsiveness);
+
+
 
   useEffect(() => {
     checkIfWalletIsConnected();
-    renderTotalWaves();
     fetchUserName();
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+    responsiveness()
+  }, [chatMode]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <div className="mainContainer">
@@ -215,7 +187,10 @@ function HomePage() {
         <div className="homePageInnerCon">
           <NavBabr setModalDisplay={setModalDisplay} />
           <div className="centerCon">
-            <div className="centerConLeft">
+            <div
+              className="centerConLeft"
+              style={{ display: showLeft ? "flex" : "none"}}
+            >
               <div className="greeting">
                 <div className="description">
                   <h1 className="walletAddress">
@@ -230,6 +205,15 @@ function HomePage() {
                   wallet and that's it, no bank charges, no long bank que, no
                   paper works, no government! <br />
                 </div>
+              </div>
+              <div
+                className="unreadMessage"
+                onClick={() => {
+                  console.log("clicked", chatMode);
+                  setChatMode(true);
+                }}
+              >
+                Unread Messages
               </div>
               <form className="form" onSubmit={wave}>
                 <input
@@ -253,8 +237,11 @@ function HomePage() {
                 )}
               </form>
             </div>
-            <div className="centerConRight">
-            <div className="greeting">
+            <div
+              className="centerConRight"
+              style={{display: showRight ? "flex" : "none"}}
+            >
+              <div className="greeting">
                 <div className="description">
                   <h1 className="walletAddress">
                     Hi,{" "}
@@ -268,6 +255,7 @@ function HomePage() {
                   wallet and that's it, no bank charges, no long bank que, no
                   paper works, no government! <br />
                 </div>
+                {/* <Button buttonText="Unread" /> */}
               </div>
               <div className="messagesHeader">
                 <h1
@@ -290,7 +278,9 @@ function HomePage() {
                   <div className="expandedMessageWrapper">
                     <div className="expandedMessageCon">
                       <h1 className="expandedMessageDp">
-                        <span role="img" aria-label="wave-emoji">✉️</span>
+                        <span role="img" aria-label="wave-emoji">
+                          ✉️
+                        </span>
                       </h1>
                       <h3 className="expandedMessageAddress">
                         {expand.address}
@@ -358,48 +348,6 @@ function HomePage() {
           <Cookies />
         </div>
       </div>
-
-      {/* <div className="dataContainer">
-        <div className="header">Hi Satoshi! 👊🏾</div>
-
-        <div className="bio">
-          Life Hack: Save your happiness on blockchain so no one can change it
-        </div>
-        <input
-          type="text"
-          className="textBox"
-          onChange={(e) => {
-            console.log(e.target.value)
-            setMessage(e.target.value);
-          }}
-        />
-
-        <button className="waveButton" onClick={wave}>
-          {buttonText}
-        </button>
-
-        <h1 className="totall">
-          {"Awesom! we've got $" + totalWaves + " already in our wallet!"}
-        </h1>
-        <div className="transactionContainer">
-          {allWaves.map((wave, index) => {
-            return (
-              <div
-                key={index}
-                style={{
-                  backgroundColor: "#efefef",
-                  marginTop: "16px",
-                  padding: "8px",
-                }}
-              >
-                <div>Address: {wave.address}</div>
-                <div>Time: {wave.timestamp.toString()}</div>
-                <div>Message: {wave.message}</div>
-              </div>
-            );
-          })}
-        </div>
-      </div> */}
     </div>
   );
 }

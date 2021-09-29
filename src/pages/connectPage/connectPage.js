@@ -61,12 +61,6 @@ function ConnectPage({getConnectedWallet}) {
       getConnectedWallet(true)
     } catch (error) {
       console.log(error);
-      // localStorage.setItem('userName', JSON.stringify({
-      //   complete: "",
-      //   firstSix: "",
-      //   lastFour: "",
-      //   initial: ""
-      // }))
       return;
     }
   };

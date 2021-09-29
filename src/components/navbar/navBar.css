@@ -51,9 +51,9 @@
 .menuCon {
   /* border: 1px solid green; */
   /* height: 30vh; */
-  width: 20vw;
+  /* width: 20vw; */
   position: absolute;
-  right: 20px;
+  right: 0px;
   top: 20px;
   border-radius: 5px;
   background-color: white;
@@ -113,7 +113,7 @@
 .menuList > li {
   list-style-type: none;
   cursor: pointer;
-  padding: 20px;
+  padding: 20px 50px;
   /* border-bottom: 1px solid green; */
 }
 

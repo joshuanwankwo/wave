@@ -88,7 +88,7 @@
   font-size: 40px;
   line-height: 69px;
   color: #393939;
-  padding-bottom: 20px;
+  padding-bottom: 30px;
 }
 
 .shortenedAddress {
@@ -157,6 +157,21 @@
 
 .centerConRight > .greeting {
   display: none;
+}
+
+.unreadMessage {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  bottom: 20px;
+  width: 300px;
+  border-radius: 10px;
+  padding: 18px;
+  font-weight: bolder;
+  font-size: 20px;
+  background: #ffd4468a;
+  color: #000000;
 }
 
 form {
@@ -358,12 +373,56 @@ form > input:focus {
 
 @media only screen and (max-width: 979px) {
   /* For mobile phones: */
+
+  .centerConRight {
+    display: none;
+    width: 100% !important;
+  }
+
   .centerConLeft {
+    width: 100% !important;
+  }
+
+  .description {
+    width: 85%;
+    margin: 0 0 100px 0;
+  }
+
+  .form {
     display: none;
   }
-  .centerConRight {
+
+  .walletAddress{
+    padding-bottom: 15px;
+  }
+
+  .unreadMessage{
+    display: flex;
+  }
+
+  .transaction{
+    width: 90%;
+  }
+
+  .expandedMessageCon{
+    width: 70%;
+  }
+
+  .expandedMessageAddress{
+    font-size: 10px;
+    font-weight: lighter;
+  }
+
+  .expandedMessageText{
+    font-size: 20px;
+  }
+
+  /* .centerConLeft {
+    display: none;
+  } */
+  /* .centerConRight {
     width: 100% !important;
-    /* border: 1px solid green; */
+    border: 1px solid green;
   }
   .centerConRight > form {
     display: flex;
@@ -373,6 +432,13 @@ form > input:focus {
   .centerConRight > .greeting {
     height: 100%;
     display: flex;
-    /* z-index: 70000; */
+
+    z-index: 70000;
   }
+  .messagesContainer, .messagesHeader, form{
+    display: none;
+  }
+  .description{
+    width: 83%;
+  } */
 }

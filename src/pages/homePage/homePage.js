@@ -14,7 +14,7 @@ function HomePage() {
   const [loading, setLoading] = useState(false);
   const contractAddress = "0x68Cc2aCad3156d91a29F62C3Ed843a39D190C497";
   const contractABI = waveportal.abi;
-  const [modalDisplay, setModalDisplay] = useState("none !important");
+  const [modalDisplay, setModalDisplay] = useState("none");
   const [expand, setExpand] = useState({
     address: "",
     message: "",
@@ -103,7 +103,7 @@ function HomePage() {
         console.log("Total waves are ", count.toNumber(), " in number");
 
         const waveTxn = await wavePortalContract.wave(message, {
-          gasLimit: 30000,
+          gasLimit: 600000,
         });
         console.log("Mining...", waveTxn.hash);
 

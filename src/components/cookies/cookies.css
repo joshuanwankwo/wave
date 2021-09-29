@@ -15,9 +15,9 @@
     box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
 
 }
-.cookiesContainer > div{
-    /* border: 1px solid green; */
-}
+/* .cookiesContainer > div{
+    border: 1px solid green;
+} */
 .cookiesBold{
     font-size: 25px;
 }
@@ -32,3 +32,34 @@
     font-size: 30px;
     cursor: pointer;
 }
+
+
+@media only screen and (max-width: 979px) {
+    /* For mobile phones: */
+    .cookiesContainer{
+        flex-direction: column;
+        align-items: flex-start;
+        position: relative;
+        padding: 10px  15px;
+        width: 85%;
+        height: unset;
+
+    }
+    .cookiesMessage{
+        width: unset;
+        color: #807e7e;
+    }
+
+    .cookiesBold{
+        font-size: 17px;
+        margin: 0px;
+        font-weight: bold;
+    }
+    .closeCookies{
+        position: absolute;
+        top: 0px;
+        right: 10px;
+        font-size: 25px;
+    }
+    
+  }

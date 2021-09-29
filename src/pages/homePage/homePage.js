@@ -6,12 +6,13 @@ import NavBabr from "../../components/navbar/navBabr";
 import Cookies from "../../components/cookies/cookies";
 // import Button from "../../components/button/button";
 import Modal from "../../components/modal/modal";
+import spinner from "../../assets/spinner.gif";
 
 function HomePage() {
-  // const [currentAccount, setCurrentAccount] = useState();
   const [allWaves, setAllWaves] = useState([]);
   const [message, setMessage] = useState("");
-  const contractAddress = "0x530A76323F7A2EC0A3687201B003b86887012d2a";
+  const [loading, setLoading] = useState(false);
+  const contractAddress = "0xb6775f26dC492F4a895A790c71b49e6751c030a4";
   const contractABI = waveportal.abi;
   const [modalDisplay, setModalDisplay] = useState("none");
   const [expand, setExpand] = useState({
@@ -20,10 +21,18 @@ function HomePage() {
     time: "12:00 AM",
     state: false,
   });
+  const [username, setUsername] = useState({
+    complete: "",
+    firstSix: "",
+    lastFour: "",
+    initial: "",
+  });
 
   // const testArray = [
   //   1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
   // ];
+
+  
 
   const checkIfWalletIsConnected = async () => {
     console.log("started");
@@ -76,6 +85,7 @@ function HomePage() {
   const wave = async (e) => {
     e.preventDefault();
     setMessage("");
+    setLoading(true);
     try {
       const { ethereum } = window;
 
@@ -93,7 +103,7 @@ function HomePage() {
         console.log("Total waves are ", count.toNumber(), " in number");
 
         const waveTxn = await wavePortalContract.wave(message, {
-          gasLimit: 300000,
+          gasLimit: 30000,
         });
         console.log("Mining...", waveTxn.hash);
 
@@ -102,10 +112,12 @@ function HomePage() {
 
         count = await wavePortalContract.getTotalWaves();
         console.log("Total waves are ", count.toNumber(), " in number");
+        setLoading(false);
       } else {
         console.log("Ethereum object doesn't exist");
       }
     } catch (error) {
+      setLoading(false);
       console.log(error.message);
     }
   };
@@ -152,7 +164,6 @@ function HomePage() {
 
         console.log(waves);
 
-
         let wavesCleaned = [];
 
         waves.forEach((wave) => {
@@ -183,11 +194,19 @@ function HomePage() {
     }
   };
 
+  const fetchUserName = () => {
+    let newUsername = JSON.parse(localStorage.getItem("userName"));
+    console.log(newUsername);
+    setUsername(newUsername);
+  };
+
+  // fetchUserName();
+
   useEffect(() => {
     checkIfWalletIsConnected();
     renderTotalWaves();
-  }, []) // eslint-disable-line react-hooks/exhaustive-deps
-
+    fetchUserName();
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <div className="mainContainer">
@@ -198,27 +217,40 @@ function HomePage() {
           <div className="centerCon">
             <div className="centerConLeft">
               <div className="greeting">
-              <h1 className="walletAddress">Hi, 0x4610...Cb4F</h1>
-              <div className="description">
-                How about you wave and get a cake? <br />
-                Wave to a community of blockchain developers and enthusaists and
-                you might get lucky and get some free eth sent to your wallet
-                and that's it, no bank charges, no long bank que, no paper
-                works, no government! <br />
-              </div>
+                <div className="description">
+                  <h1 className="walletAddress">
+                    Hi,{" "}
+                    <span className="shortenedAddress">
+                      {username.firstSix}...{username.lastFour}
+                    </span>
+                  </h1>
+                  How about you wave and get a cake? <br />
+                  Wave to a community of blockchain developers and enthusaists
+                  and you might get lucky and get some free eth sent to your
+                  wallet and that's it, no bank charges, no long bank que, no
+                  paper works, no government! <br />
+                </div>
               </div>
               <form className="form" onSubmit={wave}>
                 <input
                   type="text"
-                  placeholder="Type a message"
+                  placeholder="Type a message..."
                   value={message}
                   onChange={(e) => {
                     setMessage(e.target.value);
                   }}
                 />
-                <button className="sendButton" onClick={wave}>
-                  <span role="img" aria-label="wave-emoji">👋</span>
-                </button>
+                {loading ? (
+                  <span className="sendButton">
+                    <img src={spinner} alt="spinner" />
+                  </span>
+                ) : (
+                  <button className="sendButton" onClick={wave}>
+                    <span role="img" aria-label="wave-emoji">
+                      👋
+                    </span>
+                  </button>
+                )}
               </form>
             </div>
             <div className="centerConRight">
@@ -240,14 +272,20 @@ function HomePage() {
               </div>
               <div className="messagesContainer">
                 {expand.state ? (
-                 <div className="expandedMessageWrapper">
+                  <div className="expandedMessageWrapper">
                     <div className="expandedMessageCon">
-                    <h1 className="expandedMessageDp">J</h1>
-                    <h3 className="expandedMessageAddress">{expand.address}</h3>
-                    <h3 className="expandedMessageText">"{expand.message}"</h3>
-                    <h3 className="expandedMessageTime">{expand.time} </h3>
+                      <h1 className="expandedMessageDp">
+                        <span role="img" aria-label="wave-emoji">✉️</span>
+                      </h1>
+                      <h3 className="expandedMessageAddress">
+                        {expand.address}
+                      </h3>
+                      <h3 className="expandedMessageText">
+                        "{expand.message}"
+                      </h3>
+                      <h3 className="expandedMessageTime">{expand.time} </h3>
+                    </div>
                   </div>
-                 </div>
                 ) : (
                   allWaves.map((wave, key) => {
                     return (
@@ -260,14 +298,14 @@ function HomePage() {
                             state: true,
                             message: wave.message,
                             time: wave.timestamp.toString(),
-                            address: wave.address
+                            address: wave.address,
                           });
                         }}
                       >
                         <div className="dp">{key + 1}</div>
                         <div className="info">
                           <div className="messageWrapper">
-                            <h4>{wave.address}</h4>
+                            <h4>{username.firstSix}</h4>
                             <span className="recievedMessage">
                               {wave.message}
                             </span>

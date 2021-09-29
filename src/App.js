@@ -4,10 +4,12 @@ import HomePage from "./pages/homePage/homePage";
 
 function App() {
   const [connectedWallet, setConnectedWallet] = useState(true)
+  
 
   console.log("Connect is ", connectedWallet)
 
-  const getConnectedWallet = (connected) => {
+
+  const getConnectedWallet = (connected, walletAddress) => {
     setConnectedWallet(connected)
   }
 

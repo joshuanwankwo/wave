@@ -27,7 +27,7 @@ function Modal({ modalDisplay, setModalDisplay }) {
           <br />
           Wave is my own version of WavePortal, a task from @buildspace for
           learning blockchain using solidity and ethereum. I 100% recommend the
-          @buildspace for learning, the course content, structure, community and
+          @buildspace for learning blockchain development. the course content, structure, community and
           tutors are all dope!
         </p>
       </div>

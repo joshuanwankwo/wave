@@ -3,18 +3,23 @@
     width: 300px;
     border-radius: 10px;
     border: none;
-    margin: 10px;
-    padding: 10px;
+    /* margin: 15px; */
+    margin-top: 15px;
+    padding: 20px;
     font-family: sans-serif;
-    font-weight: 550;
-    font-size: 17px;
+    font-weight: bolder;
+    font-size: 18px;
     display: flex;
     align-items: center;
     justify-content: space-evenly;
+    position: relative;
     background-color: rgba(0, 0, 0, 0.062);
     color: black;
+    color: white;
 }
 
 .thumb{
+    position: absolute;
     font-size: 25px;
+    right: 30px;
 }

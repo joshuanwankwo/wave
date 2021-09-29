@@ -6,23 +6,33 @@
     display: flex;
 }
 
-.connectMainContainer > div {
-    width: 50%;
-    height: 100%;
-    /* border: 1px solid green; */
-}
 
 .connectLeft{
-    background: url("../../assets/josh.jpg");
+    width: 40%;
+    background-image: linear-gradient( #ffd44796, #00000048);
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.connectLeft >h1{
+    font-size: 5rem;
+    color: #fff;
 }
 
 .connectRight{
+    width: 60%;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     /* color: #e930492d; */
+}
+
+.errorMessage{
+    color: rgba(255, 0, 0, 0.548);
+    margin: 5px 190px 0 0;
 }

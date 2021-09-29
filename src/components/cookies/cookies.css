@@ -1,5 +1,5 @@
 .cookiesContainer{
-    border: 1px solid green;
+    border: 1px solid #fcd451;
     width: 95%;
     height: 10vh;
     /* padding: 10px; */
@@ -11,7 +11,7 @@
     border-radius: 10px;
     position: absolute;
     bottom: 10px;
-    background-color: white;
+    background: white;
     box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
 
 }
@@ -24,6 +24,8 @@
 
 .cookiesMessage{
     width: 70%;
+    color: #807e7e;
+    font-size: 15px;
 }
 
 .closeCookies{

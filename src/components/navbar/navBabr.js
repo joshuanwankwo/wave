@@ -3,9 +3,37 @@ import "./navBar.css";
 
 function NavBabr({setModalDisplay}) {
   const [display, setDisplay] = useState("none");
+  // document.addEventListener('click', (e)=>{
+  //   console.log(e.target.className);
+  //   console.log("display is ", display);
+  //   if(display !== "none" && e.target.className !== "menuCon"){
+  //     setDisplay("none")
+  //   }else{
+  //     return null;
+  //   }
+
+  // })
+
+    // //function to close the modal onClick of the outside modal
+    // document.addEventListener(
+    //   "click",
+    //   function (e) {
+    //     if (e.target.className === "menuCon") {
+    //       closeModal();
+    //     }
+    //   },
+    //   false
+    // );
+  
+    // function closeModal() {
+    //   setDisplay("none");
+    // }
+
+
   return (
     <div className="navBarContainer">
-      {/* <h3>Logo👊🏾</h3> */}
+      <div className="navBarInnerCon">
+        {/* <h3>Logo👊🏾</h3> */}
       <h3>Wave<span role="img" aria-label="wave-emoji">👋</span></h3>
       <div className="iconCon">
         <span
@@ -62,6 +90,7 @@ function NavBabr({setModalDisplay}) {
           has the best blockchain learning plartfom and community!
         </div>
       </div> */}
+      </div>
     </div>
   );
 }

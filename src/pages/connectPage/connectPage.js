@@ -1,9 +1,10 @@
 import Button from "../../components/button/button";
 import "./connectPage.css";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 function ConnectPage({getConnectedWallet}) {
   // const [currentAccount, setCurrentAccount] = useState();
+  const [errorMessage, setErrorMessage] = useState(false)
 
   const checkIfWalletIsConnected = async () => {
     console.log("started");
@@ -46,32 +47,54 @@ function ConnectPage({getConnectedWallet}) {
       });
 
       console.log("Connected account ", accounts[0]);
-      // setCurrentAccount(accounts[0]);
+      const walletAddress = accounts[0].toString();
+
+      var userName = {
+        complete: walletAddress,
+        firstSix: walletAddress.substring(0, 6),
+        lastFour: walletAddress.substring(walletAddress.length - 4),
+        initial: walletAddress.substring(0, 1)
+      }
+
+      localStorage.setItem('userName', JSON.stringify(userName));
+      
       getConnectedWallet(true)
     } catch (error) {
       console.log(error);
+      // localStorage.setItem('userName', JSON.stringify({
+      //   complete: "",
+      //   firstSix: "",
+      //   lastFour: "",
+      //   initial: ""
+      // }))
       return;
     }
   };
+
 
   useEffect(() => {
     checkIfWalletIsConnected();
   }, [])// eslint-disable-line react-hooks/exhaustive-deps
   return (
     <div className="connectMainContainer">
-      <div className="connectLeft"></div>
-      <div className="connectRight">
+      <div className="connectLeft">
       <h1>Wave<span role="img" aria-label="cookies-emoji">👋</span></h1>
+      </div>
+      <div className="connectRight">
         <Button
           buttonText="Sign In "
           thumb="👎"
-          bg="#e930492d"
+          bg="#00000048"
           cursor="not-allowed"
+          action={()=>{
+            setErrorMessage(true)
+          }}
         />
+        <h6 className="errorMessage" style={{display: errorMessage ? "block" : "none"}}>Sorry we've moved to Web3!</h6>
         <Button
           buttonText="Connect Wallet "
           thumb="👍"
-          bg="#30e9772d"
+          bg="#ffd44796"
           cursor="pointer"
           action={()=>{
               connectWallet();

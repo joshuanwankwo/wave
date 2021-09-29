@@ -79,7 +79,9 @@
 
 .backButton{
     font-size: 20px;
-    background-color: #fff;
+    background: #ffd446;
+    color: #fff;
+    font-weight: bolder;
     height: 30px;
     width: 30px;
     border-radius: 50%;

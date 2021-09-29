@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import "./navBar.css";
+import github from "../../assets/github.svg";
+import twitter from "../../assets/twitter.svg";
 
 function NavBabr({setModalDisplay}) {
   const [display, setDisplay] = useState("none");
@@ -67,10 +69,10 @@ function NavBabr({setModalDisplay}) {
           ✖️
         </span>
         <ul className="menuList">
-            <li>Dark Theme</li>
-            <li><a href="https://www.github.com/joshuanwankwo">Github</a></li>
-            <li><a href="https://www.twitter.com/judicodes">Twitter</a></li>
-            <li>Disconnect Wallet</li>
+            <li>Dark Theme <h5 className="tag">Coming soon</h5></li>
+            <li>  <a href="https://www.github.com/joshuanwankwo" rel="noopener noreferrer" target="_blank">Github <img src={github} alt="" /></a></li>
+            <li>  <a href="https://www.twitter.com/judicodes" rel="noopener noreferrer" target="_blank">Twitter <img src={twitter} alt="" /></a></li>
+            <li>Disconnect Wallet<h5 className="tag">Coming soon</h5></li>
         </ul>
        </div>
       </div>

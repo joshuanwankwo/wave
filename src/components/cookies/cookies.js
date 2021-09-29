@@ -7,8 +7,8 @@ function Cookies() {
     <div className="cookiesContainer" style={{ display: display }}>
       <div className="cookiesBold">Cookies!<span role="img" aria-label="cookies-emoji">🍪</span></div>
       <div className="cookiesMessage">
-        By continuing, you agree that blockchain is the future and @buildspace
-        has the best blockchain learning plartfom and community!
+        By continuing, you agree that blockchain is the future and <a href="buildspace.so" target="_blank">@buildspace </a> 
+          has the best blockchain learning plartfom and community!
       </div>
       <div
         

@@ -1,5 +1,7 @@
 import React from "react";
 import "./modal.css";
+import verified from "../../assets/verified.svg";
+import back from "../../assets/back.svg";
 // import Memoji from "../../assets/memoji.PNG";
 // import Josh from "../../assets/josh.jpg"
 
@@ -11,10 +13,10 @@ function Modal({ modalDisplay, setModalDisplay }) {
         <div className="modalLeftInnerCon">
         <span className="backButton" onClick={() => {
           setModalDisplay("none")
-        }}>〈</span>
+        }}> <img src={back} alt="" /> </span>
         <span className="nameWrapper">
           <h1>Joshua Nwankwo</h1>
-          <h5>@judicodes</h5>
+          <h5>@judicodes   <img src={verified} alt="" /> </h5>
         </span>
         </div>
       </div>
@@ -25,9 +27,9 @@ function Modal({ modalDisplay, setModalDisplay }) {
           using JavaScript technologis like ReactJS, React Native and ElectronJS. I recently started coding smart contracts using solidity and this is one of my pet projects on etheruem blockchain development.
           <br />
           <br />
-          Wave is my own version of WavePortal, a task from @buildspace for
+          Wave is my own version of WavePortal, a task from <a href="buildspace.so" target="_blank">@buildspace</a> for
           learning blockchain using solidity and ethereum. I 100% recommend the
-          @buildspace for learning blockchain development. the course content, structure, community and
+          <a href="buildspace.so" target="_blank">@buildspace</a> for learning blockchain development. the course content, structure, community and
           tutors are all dope!
         </p>
       </div>

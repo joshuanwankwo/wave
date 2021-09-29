@@ -7,7 +7,7 @@ import Cookies from "../../components/cookies/cookies";
 // import Button from "../../components/button/button";
 import Modal from "../../components/modal/modal";
 import spinner from "../../assets/spinner.gif";
-import Button from "../../components/button/button";
+import DP from "../../assets/profile.svg";
 
 function HomePage() {
   const [allWaves, setAllWaves] = useState([]);
@@ -292,7 +292,7 @@ function HomePage() {
                     </div>
                   </div>
                 ) : (
-                  allWaves.map((wave, key) => {
+                  allWaves.reverse().map((wave, key) => {
                     return (
                       <div
                         className="transaction"
@@ -307,7 +307,7 @@ function HomePage() {
                           });
                         }}
                       >
-                        <div className="dp">{key + 1}</div>
+                        <img src={DP} alt="" className="dp" />
                         <div className="info">
                           <div className="messageWrapper">
                             <h4>{username.firstSix}</h4>

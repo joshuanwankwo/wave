@@ -76,10 +76,15 @@
     box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
 
 }
+.modalRight > p > a{
+    color: #fcd451;
+    display: contents;
+}
 
 .backButton{
     font-size: 20px;
-    background: #ffd446;
+    /* border: 1px solid #ffd446; */
+    /* background: #ffd446; */
     color: #fff;
     font-weight: bolder;
     height: 30px;
@@ -88,16 +93,23 @@
     display: flex;
     align-items: center;
     align-self: flex-start;
-    justify-self: start;
+    justify-self: center;
     cursor: pointer;
     margin-top: -20px;
 
+}
+
+.backButton > img{
+    height: 40px;
 }
 
 
 .nameWrapper > h1, h5{
     margin: 0;
     color: white;
+    display: flex;
+    align-items: center;
+    /* justify-content: center; */
 }
 
 .nameWrapper > h1{
@@ -107,6 +119,10 @@
 .nameWrapper > h5{
     font-size: 20px;
     padding-top: 6px;
+}
+
+.nameWrapper > h5 > img{
+    padding: 0 0 0 5px;
 }
 
 

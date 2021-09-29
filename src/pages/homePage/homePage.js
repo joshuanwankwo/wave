@@ -11,7 +11,7 @@ function HomePage() {
   // const [currentAccount, setCurrentAccount] = useState();
   const [allWaves, setAllWaves] = useState([]);
   const [message, setMessage] = useState("");
-  const contractAddress = "0x5a056c90F1Fd8546B1E4D91d6Fb1b92abD7A1a19";
+  const contractAddress = "0x530A76323F7A2EC0A3687201B003b86887012d2a";
   const contractABI = waveportal.abi;
   const [modalDisplay, setModalDisplay] = useState("none");
   const [expand, setExpand] = useState({
@@ -151,7 +151,10 @@ function HomePage() {
         const waves = await wavePortalContract.getAllWaves();
 
         console.log(waves);
+
+
         let wavesCleaned = [];
+
         waves.forEach((wave) => {
           wavesCleaned.push({
             address: wave.waiver,
@@ -168,9 +171,9 @@ function HomePage() {
           setAllWaves((prevState) => [
             ...prevState,
             {
-              address: wave.waiver,
-              timestamp: new Date(wave.timeStamp * 1000),
-              message: wave.message,
+              address: from,
+              timestamp: new Date(timestamp * 1000),
+              message: message,
             },
           ]);
         });
@@ -246,7 +249,7 @@ function HomePage() {
                   </div>
                  </div>
                 ) : (
-                  allWaves.map((test, key) => {
+                  allWaves.map((wave, key) => {
                     return (
                       <div
                         className="transaction"
@@ -255,18 +258,18 @@ function HomePage() {
                           console.log(expand);
                           setExpand({
                             state: true,
-                            message: "Test",
-                            time: "1:00 AM",
-                            address: "0x5a056c90F1Fd8546B1E4D91d6Fb1b92abD7A1a19"
+                            message: wave.message,
+                            time: wave.timestamp.toString(),
+                            address: wave.address
                           });
                         }}
                       >
                         <div className="dp">{key + 1}</div>
                         <div className="info">
                           <div className="messageWrapper">
-                            <h4>Address</h4>
+                            <h4>{wave.address}</h4>
                             <span className="recievedMessage">
-                              Message from the waver, just to clearify things
+                              {wave.message}
                             </span>
                           </div>
                           <span className="expand">〉</span>

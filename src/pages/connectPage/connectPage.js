@@ -81,6 +81,16 @@ function ConnectPage({getConnectedWallet}) {
       <h1>Wave<span role="img" aria-label="cookies-emoji">👋</span></h1>
       </div>
       <div className="connectRight">
+      <h1>Wave<span role="img" aria-label="cookies-emoji">👋</span></h1>
+      <Button
+          buttonText="Connect Wallet "
+          thumb="👍"
+          bg="#ffd44796"
+          cursor="pointer"
+          action={()=>{
+              connectWallet();
+          }}
+        />
         <Button
           buttonText="Sign In "
           thumb="👎"
@@ -91,15 +101,6 @@ function ConnectPage({getConnectedWallet}) {
           }}
         />
         <h6 className="errorMessage" style={{display: errorMessage ? "block" : "none"}}>Sorry we've moved to Web3!</h6>
-        <Button
-          buttonText="Connect Wallet "
-          thumb="👍"
-          bg="#ffd44796"
-          cursor="pointer"
-          action={()=>{
-              connectWallet();
-          }}
-        />
       </div>
     </div>
   );

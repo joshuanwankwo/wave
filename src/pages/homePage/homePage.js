@@ -12,13 +12,13 @@ function HomePage() {
   const [allWaves, setAllWaves] = useState([]);
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
-  const contractAddress = "0xb6775f26dC492F4a895A790c71b49e6751c030a4";
+  const contractAddress = "0x68Cc2aCad3156d91a29F62C3Ed843a39D190C497";
   const contractABI = waveportal.abi;
-  const [modalDisplay, setModalDisplay] = useState("none");
+  const [modalDisplay, setModalDisplay] = useState("none !important");
   const [expand, setExpand] = useState({
-    address: "0x5a056c90F1Fd8546B1E4D91d6Fb1b92abD7A1a19",
-    message: "This is a test message",
-    time: "12:00 AM",
+    address: "",
+    message: "",
+    time: "",
     state: false,
   });
   const [username, setUsername] = useState({
@@ -118,7 +118,7 @@ function HomePage() {
       }
     } catch (error) {
       setLoading(false);
-      console.log(error.message);
+      console.log(error);
     }
   };
 
@@ -254,6 +254,21 @@ function HomePage() {
               </form>
             </div>
             <div className="centerConRight">
+            <div className="greeting">
+                <div className="description">
+                  <h1 className="walletAddress">
+                    Hi,{" "}
+                    <span className="shortenedAddress">
+                      {username.firstSix}...{username.lastFour}
+                    </span>
+                  </h1>
+                  How about you wave and get a cake? <br />
+                  Wave to a community of blockchain developers and enthusaists
+                  and you might get lucky and get some free eth sent to your
+                  wallet and that's it, no bank charges, no long bank que, no
+                  paper works, no government! <br />
+                </div>
+              </div>
               <div className="messagesHeader">
                 <h1
                   className="total"
@@ -317,6 +332,27 @@ function HomePage() {
                   })
                 )}
               </div>
+              <form className="form" onSubmit={wave}>
+                <input
+                  type="text"
+                  placeholder="Type a message..."
+                  value={message}
+                  onChange={(e) => {
+                    setMessage(e.target.value);
+                  }}
+                />
+                {loading ? (
+                  <span className="sendButton">
+                    <img src={spinner} alt="spinner" />
+                  </span>
+                ) : (
+                  <button className="sendButton" onClick={wave}>
+                    <span role="img" aria-label="wave-emoji">
+                      👋
+                    </span>
+                  </button>
+                )}
+              </form>
             </div>
           </div>
           <Cookies />

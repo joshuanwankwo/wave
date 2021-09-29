@@ -4,6 +4,7 @@
     width: 100vw;
     /* background-color: rgba(26, 146, 66, 0.486); */
     display: flex;
+    
 }
 
 
@@ -21,6 +22,16 @@
 .connectLeft >h1{
     font-size: 5rem;
     color: #fff;
+  font-family: 'Poppins', sans-serif;
+
+}
+
+.connectRight >h1{
+    font-size: 3rem;
+    color: #fff;
+  font-family: 'Poppins', sans-serif;
+  display: none;
+
 }
 
 .connectRight{
@@ -34,5 +45,22 @@
 
 .errorMessage{
     color: rgba(255, 0, 0, 0.548);
-    margin: 5px 190px 0 0;
+    margin: 11px 180px 0 0;
 }
+
+@media only screen and (max-width: 979px) {
+    /* For mobile phones: */
+    .connectLeft{
+        display: none;
+    }
+    .connectRight{
+        width: 100%;
+        background-image: linear-gradient( #00000048, #ffd44796);
+
+    }
+
+    .connectRight >h1{
+        display: flex;
+    }
+    
+  }

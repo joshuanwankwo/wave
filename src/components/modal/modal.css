@@ -109,3 +109,31 @@
     font-size: 20px;
     padding-top: 6px;
 }
+
+
+@media only screen and (max-width: 979px) {
+    /* For mobile phones: */
+
+    .modalCon{
+        flex-wrap: wrap;
+        /* border: 1px solid green; */
+    }
+    .modalLeft{
+        width: 100% !important;
+        height: 100% !important;
+        background-attachment: fixed;
+
+    }
+    .modalRight{
+        width: 100% !important;
+        height: max-content !important;
+        padding-bottom: 50px;
+        padding-top: 30px;
+    }
+
+    .modalRight > p{
+        width: 75%;
+        padding: 20px;
+    }
+    
+  }

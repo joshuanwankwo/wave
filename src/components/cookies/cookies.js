@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./cookies.css";
+import ReactGA from "react-ga";
 
 function Cookies() {
   const [display, setDisplay] = useState("flex");
@@ -14,6 +15,11 @@ function Cookies() {
         
         className="closeCookies"
         onClick={() => {
+          ReactGA.event({
+            category: "Cookies",
+            action: "Clicked On Close Cookies",
+            label: "Close Cookies"
+          });
           setDisplay("none");
         }}
       >

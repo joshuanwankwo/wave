@@ -5,7 +5,10 @@ import ReactGA from 'react-ga';
 
 function ConnectPage({getConnectedWallet}) {
   // const [currentAccount, setCurrentAccount] = useState();
-  const [errorMessage, setErrorMessage] = useState(false)
+  const [errorMessage, setErrorMessage] = useState({
+    display: false,
+    errorMessage: ""
+  })
 
   const checkIfWalletIsConnected = async () => {
     console.log("started");
@@ -45,6 +48,11 @@ function ConnectPage({getConnectedWallet}) {
 
       if (!ethereum) {
         console.log("Get MetaMask!");
+        setErrorMessage({
+          display: true,
+          errorMessage: "Please make sure your Metamask is connected"
+        });
+
         return;
       }
 
@@ -102,10 +110,13 @@ function ConnectPage({getConnectedWallet}) {
               action: "Clicked on sign in button",
               label: "SignIn",
             });
-            setErrorMessage(true)
+            setErrorMessage({
+              display: true,
+              errorMessage: "Sorry we've moved to Web3!"
+            })
           }}
         />
-        <h6 className="errorMessage" style={{display: errorMessage ? "block" : "none"}}>Sorry we've moved to Web3!</h6>
+        <h6 className="errorMessage" style={{display: errorMessage ? "block" : "none"}}>{errorMessage.errorMessage}</h6>
       </div>
     </div>
   );

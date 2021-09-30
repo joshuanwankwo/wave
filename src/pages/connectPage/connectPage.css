@@ -41,12 +41,16 @@
     align-items: center;
     justify-content: center;
     /* color: #e930492d; */
+    position: relative;
 }
 
 .errorMessage{
     color: rgba(255, 0, 0, 0.548);
-    margin: 11px 180px 0 0;
+    /* margin: 11px 180px 0 0; */
+    position: absolute;
+    bottom: 15px;
 }
+
 
 @media only screen and (max-width: 979px) {
     /* For mobile phones: */

@@ -8,6 +8,7 @@ import Cookies from "../../components/cookies/cookies";
 import Modal from "../../components/modal/modal";
 import spinner from "../../assets/spinner.gif";
 import DP from "../../assets/profile.svg";
+import ReactGA from "react-ga";
 
 function HomePage() {
   const [allWaves, setAllWaves] = useState([]);
@@ -60,6 +61,11 @@ function HomePage() {
   };
 
   const wave = async (e) => {
+    ReactGA.event({
+      category: "Wave",
+      action: "Waved to the community",
+      label: "Wave",
+    });
     e.preventDefault();
     setMessage("");
     setLoading(true);

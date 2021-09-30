@@ -1,6 +1,7 @@
 import Button from "../../components/button/button";
 import "./connectPage.css";
 import React, { useEffect, useState } from "react";
+import ReactGA from 'react-ga';
 
 function ConnectPage({getConnectedWallet}) {
   // const [currentAccount, setCurrentAccount] = useState();
@@ -34,6 +35,11 @@ function ConnectPage({getConnectedWallet}) {
   };
 
   const connectWallet = async () => {
+    ReactGA.event({
+      category: "ConnectWallet",
+      action: "Clicked on connect wallet",
+      label: "ConnectWallet"
+    });
     try {
       const { ethereum } = window;
 
@@ -91,6 +97,11 @@ function ConnectPage({getConnectedWallet}) {
           bg="#00000048"
           cursor="not-allowed"
           action={()=>{
+            ReactGA.event({
+              category: "SignIn",
+              action: "Clicked on sign in button",
+              label: "SignIn",
+            });
             setErrorMessage(true)
           }}
         />

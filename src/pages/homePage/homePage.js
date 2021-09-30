@@ -316,7 +316,7 @@ function HomePage() {
                         <img src={DP} alt="" className="dp" />
                         <div className="info">
                           <div className="messageWrapper">
-                            <h4>{username.firstSix}</h4>
+                            <h4>{wave.address.substring(0, 6)}</h4>
                             <span className="recievedMessage">
                               {wave.message}
                             </span>

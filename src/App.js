@@ -11,19 +11,19 @@ function App() {
   console.log("Connect is ", connectedWallet)
 
 
-  const getConnectedWallet = (connected, walletAddress) => {
+  const getConnectedWallet = (connected) => {
     setConnectedWallet(connected)
   }
 
   useEffect(() => {
     ReactGA.pageview(window.location.pathname);
-     getConnectedWallet()
+     getConnectedWallet();
   }, [])
 
   
   return (
     <div>
-     {connectedWallet ? <HomePage /> : <ConnectPage getConnectedWallet={getConnectedWallet}/>}
+     {connectedWallet ? <HomePage connectedWallet={connectedWallet} /> : <ConnectPage getConnectedWallet={getConnectedWallet}/>}
     </div>
   );
 }

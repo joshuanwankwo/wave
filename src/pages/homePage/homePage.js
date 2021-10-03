@@ -10,15 +10,13 @@ import spinner from "../../assets/spinner.gif";
 import DP from "../../assets/profile.svg";
 import ReactGA from "react-ga";
 
-function HomePage() {
+function HomePage({ connectedWallet }) {
   const [allWaves, setAllWaves] = useState([]);
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
   const [chatMode, setChatMode] = useState(false);
   const [showLeft, setShowLeft] = useState();
   const [showRight, setShowRight] = useState();
-  const contractAddress = "0x73fD2a3c5baFfdbE4ADe5e7CCC8D39b265e19158";
-  const contractABI = waveportal.abi;
   const [modalDisplay, setModalDisplay] = useState("none");
   const [expand, setExpand] = useState({
     address: "",
@@ -33,32 +31,8 @@ function HomePage() {
     initial: "",
   });
 
-  const checkIfWalletIsConnected = async () => {
-    console.log("started");
-    try {
-      const { ethereum } = window;
-
-      if (!ethereum) {
-        console.log("Please make sure your Metamask is connected");
-        return;
-      } else {
-        // console.log("The wallet detail found is ", ethereum);
-      }
-
-      const accounts = await ethereum.request({ method: "eth_accounts" });
-
-      if (accounts.length !== 0) {
-        // const account = accounts[0];
-        // console.log("Found an authorized account at: ", account);
-        // setCurrentAccount(account);
-        getAllWaves();
-      } else {
-        console.log("No authorized account found");
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  const contractAddress = "0x73fD2a3c5baFfdbE4ADe5e7CCC8D39b265e19158";
+  const contractABI = waveportal.abi;
 
   const wave = async (e) => {
     ReactGA.event({
@@ -108,12 +82,13 @@ function HomePage() {
   const getAllWaves = async () => {
     console.log("getting all waves");
 
+
     try {
       const { ethereum } = window;
 
       if (ethereum) {
         const provider = new ethers.providers.Web3Provider(ethereum);
-        const signer = await provider.getSigner();
+        const signer = provider.getSigner();
         const wavePortalContract = new ethers.Contract(
           contractAddress,
           contractABI,
@@ -160,7 +135,6 @@ function HomePage() {
     setUsername(newUsername);
   };
 
-
   const responsiveness = () => {
     if (window.innerWidth < 979 && chatMode) {
       console.log("ShowChat");
@@ -169,22 +143,20 @@ function HomePage() {
     } else if (window.innerWidth < 979 && !chatMode) {
       setShowLeft(true);
       setShowRight(false);
-    }else if(window.innerWidth > 979){
+    } else if (window.innerWidth > 979) {
       setShowLeft(true);
       setShowRight(true);
     }
-  }
-
+  };
 
   window.addEventListener("resize", responsiveness);
 
-
-
   useEffect(() => {
-    checkIfWalletIsConnected();
     fetchUserName();
-    responsiveness()
-  }, [chatMode]); // eslint-disable-line react-hooks/exhaustive-deps
+    // responsiveness();
+    getAllWaves();
+  }, [message]);
+
 
   return (
     <div className="mainContainer">
@@ -195,7 +167,7 @@ function HomePage() {
           <div className="centerCon">
             <div
               className="centerConLeft"
-              style={{ display: showLeft ? "flex" : "none"}}
+              style={{ display: showLeft ? "flex" : "none" }}
             >
               <div className="greeting">
                 <div className="description">
@@ -245,7 +217,7 @@ function HomePage() {
             </div>
             <div
               className="centerConRight"
-              style={{display: showRight ? "flex" : "none"}}
+              style={{ display: showRight ? "flex" : "none" }}
             >
               <div className="greeting">
                 <div className="description">

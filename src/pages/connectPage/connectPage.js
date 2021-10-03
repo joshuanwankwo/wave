@@ -15,12 +15,12 @@ function ConnectPage({getConnectedWallet}) {
     try {
       const { ethereum } = window;
 
-      // if (!ethereum) {
-      //   console.log("Please make sure your Metamask is connected");
-      //   return;
-      // } else {
-      //   // console.log("The wallet detail found is ", ethereum);
-      // }
+      if (!ethereum) {
+        console.log("Please make sure your Metamask is connected");
+        return;
+      } else {
+        // console.log("The wallet detail found is ", ethereum);
+      }
 
       const accounts = await ethereum.request({ method: "eth_accounts" });
 
@@ -30,6 +30,7 @@ function ConnectPage({getConnectedWallet}) {
         // setCurrentAccount(account);
         getConnectedWallet(true)
       } else {
+        // Wallet connection error
         console.log("No authorized account found");
       }
     } catch (error) {

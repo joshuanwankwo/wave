@@ -338,6 +338,7 @@ form > input:focus {
 .expandedMessageCon {
   /* border: 1px solid green; */
   /* height: fill-available; */
+  width: 70%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -369,6 +370,7 @@ form > input:focus {
 .expandedMessageText {
   font-size: 30px;
   color: #292727be;
+  text-align: center;
 }
 
 .expandedMessageTime {

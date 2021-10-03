@@ -153,7 +153,7 @@ function HomePage({ connectedWallet }) {
 
   useEffect(() => {
     fetchUserName();
-    // responsiveness();
+    responsiveness();
     getAllWaves();
   }, [message]);
 

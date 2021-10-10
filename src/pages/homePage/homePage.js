@@ -155,7 +155,7 @@ function HomePage({ connectedWallet }) {
     fetchUserName();
     responsiveness();
     getAllWaves();
-  }, [message]);
+  }, [message]); // eslint-disable-line react-hooks/exhaustive-deps
 
 
   return (

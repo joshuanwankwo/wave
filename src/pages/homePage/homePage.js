@@ -155,7 +155,7 @@ function HomePage({ connectedWallet }) {
     fetchUserName();
     responsiveness();
     getAllWaves();
-  }, [message, expand]);
+  }, [message]);
 
 
   return (

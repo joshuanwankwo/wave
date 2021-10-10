@@ -71,7 +71,7 @@ function HomePage({ connectedWallet }) {
 
         count = await wavePortalContract.getTotalWaves();
         console.log("Total waves are ", count.toNumber(), " in number");
-        getAllWaves()
+        getAllWaves();
         setLoading(false);
       } else {
         console.log("Ethereum object doesn't exist");
@@ -84,7 +84,6 @@ function HomePage({ connectedWallet }) {
 
   const getAllWaves = useCallback(async () => {
     // console.log("getting all waves");
-
 
     try {
       const { ethereum } = window;
@@ -130,7 +129,7 @@ function HomePage({ connectedWallet }) {
     } catch (error) {
       console.log(error);
     }
-  },[contractABI]);
+  }, [contractABI]);
 
   const fetchUserName = () => {
     let newUsername = JSON.parse(localStorage.getItem("userName"));
@@ -144,22 +143,23 @@ function HomePage({ connectedWallet }) {
       setShowLeft(false);
       setShowRight(true);
     } else if (window.innerWidth < 979 && !chatMode) {
+      console.log("don't show chat yet");
       setShowLeft(true);
       setShowRight(false);
     } else if (window.innerWidth > 979) {
       setShowLeft(true);
       setShowRight(true);
+      setChatMode(false)
     }
   }, [chatMode]);
 
   window.addEventListener("resize", responsiveness);
-  
+
   useEffect(() => {
     responsiveness();
     fetchUserName();
     getAllWaves();
-  }, [responsiveness, getAllWaves])
-
+  }, [responsiveness, getAllWaves]);
 
   return (
     <div className="mainContainer">
@@ -222,22 +222,6 @@ function HomePage({ connectedWallet }) {
               className="centerConRight"
               style={{ display: showRight ? "flex" : "none" }}
             >
-              <div className="greeting">
-                <div className="description">
-                  <h1 className="walletAddress">
-                    Hi,{" "}
-                    <span className="shortenedAddress">
-                      {username.firstSix}...{username.lastFour}
-                    </span>
-                  </h1>
-                  How about you wave and get a cake? <br />
-                  Wave to a community of blockchain developers and enthusaists
-                  and you might get lucky and get some free eth sent to your
-                  wallet and that's it, no bank charges, no long bank que, no
-                  paper works, no government! <br />
-                </div>
-                {/* <Button buttonText="Unread" /> */}
-              </div>
               <div className="messagesHeader">
                 <h1
                   className="total"
@@ -272,58 +256,62 @@ function HomePage({ connectedWallet }) {
                       <h3 className="expandedMessageTime">{expand.time} </h3>
                     </div>
                   </div>
-                ) : ( 
-                  <>{allWaves.map((wave, key) => {
-                    return (
-                      <div
-                        className="transaction"
-                        key={key}
-                        onClick={() => {
-                          console.log(expand);
-                          setExpand({
-                            state: true,
-                            message: wave.message,
-                            time: wave.timestamp.toString(),
-                            address: wave.address,
-                          });
-                        }}
-                      >
-                        <img src={DP} alt="" className="dp" />
-                        <div className="info">
-                          <div className="messageWrapper">
-                            <h4>{wave.address.substring(0, 6)}</h4>
-                            <span className="recievedMessage">
-                              {wave.message}
-                            </span>
+                ) : (
+                  <>
+                    {allWaves.map((wave, key) => {
+                      return (
+                        <div
+                          className="transaction"
+                          key={key}
+                          onClick={() => {
+                            console.log(expand);
+                            setExpand({
+                              state: true,
+                              message: wave.message,
+                              time: wave.timestamp.toString(),
+                              address: wave.address,
+                            });
+                          }}
+                        >
+                          <img src={DP} alt="" className="dp" />
+                          <div className="info">
+                            <div className="messageWrapper">
+                              <h4>{wave.address.substring(0, 6)}</h4>
+                              <span className="recievedMessage">
+                                {wave.message}
+                              </span>
+                            </div>
+                            <span className="expand">〉</span>
                           </div>
-                          <span className="expand">〉</span>
                         </div>
-                      </div>
-                    );
-                  })}</>
+                      );
+                    })}
+                  </>
                 )}
               </div>
-              <form className="form" onSubmit={wave}>
-                <input
-                  type="text"
-                  placeholder="Type a message..."
-                  value={message}
-                  onChange={(e) => {
-                    setMessage(e.target.value);
-                  }}
-                />
-                {loading ? (
-                  <span className="sendButton">
-                    <img src={spinner} alt="spinner" />
-                  </span>
-                ) : (
-                  <button className="sendButton" onClick={wave}>
-                    <span role="img" aria-label="wave-emoji">
-                      👋
+              {chatMode & showRight ? (
+                <form className="form" onSubmit={wave}>
+                  <input
+                    type="text"
+                    placeholder="Type a message..."
+                    value={message}
+                    onChange={(e) => {
+                      setMessage(e.target.value);
+                    }}
+                  />
+                  {loading ? (
+                    <span className="sendButton">
+                      <img src={spinner} alt="spinner" />
                     </span>
-                  </button>
-                )}
-              </form>
+                  ) : (
+                    <button className="sendButton" onClick={wave}>
+                      <span role="img" aria-label="wave-emoji">
+                        👋
+                      </span>
+                    </button>
+                  )}
+                </form>
+              ) : null}
             </div>
           </div>
           <Cookies />

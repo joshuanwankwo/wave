@@ -435,6 +435,7 @@ form > input:focus {
     padding-bottom: 100px;
   }
 
+
   /* .centerConLeft {
     display: none;
   } */
@@ -459,4 +460,13 @@ form > input:focus {
   .description{
     width: 83%;
   } */
+}
+
+
+@media only screen and (max-width: 450px) {
+  /* For mobile phones: */
+  .unreadMessage{
+    width: unset;
+    padding: 9px 12px;
+  }
 }

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { ethers } from "ethers";
 import "./homePage.css";
 import waveportal from "../../utils/WavePortal.json";
@@ -40,6 +40,8 @@ function HomePage({ connectedWallet }) {
       action: "Waved to the community",
       label: "Wave",
     });
+
+    console.log("I am being called");
     e.preventDefault();
     setMessage("");
     setLoading(true);
@@ -69,6 +71,7 @@ function HomePage({ connectedWallet }) {
 
         count = await wavePortalContract.getTotalWaves();
         console.log("Total waves are ", count.toNumber(), " in number");
+        getAllWaves()
         setLoading(false);
       } else {
         console.log("Ethereum object doesn't exist");
@@ -79,8 +82,8 @@ function HomePage({ connectedWallet }) {
     }
   };
 
-  const getAllWaves = async () => {
-    console.log("getting all waves");
+  const getAllWaves = useCallback(async () => {
+    // console.log("getting all waves");
 
 
     try {
@@ -97,7 +100,7 @@ function HomePage({ connectedWallet }) {
 
         const waves = await wavePortalContract.getAllWaves();
 
-        console.log(waves);
+        // console.log(waves);
 
         let wavesCleaned = [];
 
@@ -109,7 +112,7 @@ function HomePage({ connectedWallet }) {
           });
         });
 
-        setAllWaves(wavesCleaned);
+        setAllWaves(wavesCleaned.reverse());
 
         wavePortalContract.on("NewWave", (from, timestamp, message) => {
           console.log("New Wave ", from, timestamp, message);
@@ -127,15 +130,15 @@ function HomePage({ connectedWallet }) {
     } catch (error) {
       console.log(error);
     }
-  };
+  },[contractABI]);
 
   const fetchUserName = () => {
     let newUsername = JSON.parse(localStorage.getItem("userName"));
-    console.log(newUsername);
+    // console.log(newUsername);
     setUsername(newUsername);
   };
 
-  const responsiveness = () => {
+  const responsiveness = useCallback(() => {
     if (window.innerWidth < 979 && chatMode) {
       console.log("ShowChat");
       setShowLeft(false);
@@ -147,15 +150,15 @@ function HomePage({ connectedWallet }) {
       setShowLeft(true);
       setShowRight(true);
     }
-  };
+  }, [chatMode]);
 
   window.addEventListener("resize", responsiveness);
-
+  
   useEffect(() => {
-    fetchUserName();
     responsiveness();
+    fetchUserName();
     getAllWaves();
-  }, [message]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [responsiveness, getAllWaves])
 
 
   return (
@@ -269,8 +272,8 @@ function HomePage({ connectedWallet }) {
                       <h3 className="expandedMessageTime">{expand.time} </h3>
                     </div>
                   </div>
-                ) : (
-                  allWaves.reverse().map((wave, key) => {
+                ) : ( 
+                  <>{allWaves.map((wave, key) => {
                     return (
                       <div
                         className="transaction"
@@ -297,7 +300,7 @@ function HomePage({ connectedWallet }) {
                         </div>
                       </div>
                     );
-                  })
+                  })}</>
                 )}
               </div>
               <form className="form" onSubmit={wave}>

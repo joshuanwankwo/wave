@@ -466,7 +466,8 @@ form > input:focus {
 @media only screen and (max-width: 450px) {
   /* For mobile phones: */
   .unreadMessage{
-    width: unset;
+    width: 70%;
     padding: 9px 12px;
+    font-size: 15px;
   }
 }
